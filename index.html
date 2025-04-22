@@ -3,9 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Updated Title -->
     <title>Smart Finance Calculator & Info Hub - India</title>
     <!-- Chart.js CDN -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+
+    <!-- ============================================ -->
+    <!-- !! IMPORTANT: AdSense Script Placeholder !! -->
+    <!-- Replace YOUR_ADSENSE_PUBLISHER_ID with your actual AdSense Publisher ID -->
+    <!-- ============================================ -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_ADSENSE_PUBLISHER_ID"
+     crossorigin="anonymous"></script>
+    <!-- End AdSense Script -->
+
     <style>
         :root {
             --primary-color: #4361ee;
@@ -29,6 +39,10 @@
             --contact-banner-text: #ffffff;
             --slider-track-color: #e9ecef; /* Light grey for slider track */
             --slider-thumb-color: var(--primary-color);
+            --ad-placeholder-bg: #f0f0f0;
+            --ad-placeholder-border: #cccccc;
+            --ad-placeholder-text: #555555;
+            /* --bot-thinking-color: #999; -- Removed */
         }
 
         /* --- Base & Layout --- */
@@ -286,6 +300,33 @@
         .promo-logo:hover { transform: scale(1.05); }
         .promo-card .btn { width: auto; padding: 0.7rem 1.2rem; }
 
+        /* --- Ad Placeholder Style --- */
+        .adsense-banner-placeholder {
+            min-height: 90px; /* Standard banner height approx */
+            width: 100%;
+            max-width: 728px; /* Common leaderboard size */
+            margin: 2rem auto 1rem auto; /* Center and add spacing */
+            padding: 10px;
+            border: 1px dashed var(--ad-placeholder-border);
+            background-color: var(--ad-placeholder-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            box-sizing: border-box;
+        }
+        .adsense-banner-placeholder p {
+             color: var(--ad-placeholder-text);
+             font-size: 0.9em;
+             margin: 0;
+        }
+        /* Ensure the AdSense ins tag tries to fill the container */
+        .adsense-banner-placeholder .adsbygoogle {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
         /* --- Footer & Contact Banner --- */
         .contact-banner {
             background: var(--contact-banner-bg); color: var(--contact-banner-text);
@@ -306,7 +347,10 @@
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         .fade-in { animation: fadeIn 0.5s ease forwards; }
 
+        /* --- Chatbot Styles Removed --- */
+
     </style>
+    <!-- Font Awesome for icons (Still needed for calculator icons etc.) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
@@ -327,34 +371,43 @@
         <!-- Personal Finance Tab    -->
         <!-- ======================= -->
         <div class="tab-content active" id="personal-tab">
-             <!-- Sections: Calculators, Results, Savings, Credit, Promo, History -->
-             <!-- ... (Content from previous version is correct here) ... -->
-             <div class="calculator-container"> <div class="calculator-section fade-in"> <h2 class="section-title"><i class="fas fa-money-bill-wave"></i> Salary Calculator</h2> <div class="form-group"> <label for="gross-salary">Annual Gross Salary (₹)</label> <input type="number" id="gross-salary" placeholder="Enter annual gross salary"> </div> <div class="form-group"> <label for="monthly-salary">Monthly Gross Salary (₹)</label> <input type="number" id="monthly-salary" placeholder="Auto-calculated" readonly> </div> <div class="form-group"> <label for="regime">Tax Regime</label> <select id="regime"> <option value="new">New Tax Regime (Default - AY 2025-26)</option> <option value="old">Old Tax Regime (AY 2025-26)</option> </select> </div> <div class="form-group"> <label for="age-group">Age Group</label> <select id="age-group"> <option value="general">Below 60 years</option> <option value="senior">60 to 79 years</option> <option value="super-senior">80 years and above</option> </select> </div> <div class="form-group"> <label for="other-deductions">Monthly Post-Tax Deductions (₹)</label> <input type="number" id="other-deductions" placeholder="e.g., PF, Loan EMI" value="0"> </div> <button class="btn btn-calculate" id="calculate-salary"><i class="fas fa-calculator"></i> Calculate</button> <div class="tax-info"> <h4>Income Tax Slabs (AY 2025-26) <a href="https://www.incometax.gov.in/iec/foportal/help/individual/return-applicable-1" target="_blank" title="Go to Income Tax Dept. Website">Source <i class="fas fa-external-link-alt fa-xs"></i></a></h4> <div id="tax-slab-info"></div> <p style="font-size: 0.8rem; color: #666; margin-top: 10px;">*Std. Ded. ₹50k. Rebate & Surcharge apply per rules. Cess @ 4%.</p> </div> </div> <div class="calculator-section fade-in"> <h2 class="section-title"><i class="fas fa-receipt"></i> Monthly Expense Tracker</h2> <div class="form-group"> <label for="expense-name">Expense Name</label> <input type="text" id="expense-name" placeholder="e.g., Rent"> </div> <div class="form-group"> <label for="expense-amount">Amount (₹)</label> <input type="number" id="expense-amount" placeholder="Enter amount"> </div> <div class="form-group"> <label for="expense-category">Category</label> <select id="expense-category"> <option value="Housing">Housing</option> <option value="Food">Food</option> <option value="Transportation">Transportation</option> <option value="Utilities">Utilities</option> <option value="Entertainment">Entertainment</option> <option value="Health">Health</option> <option value="Personal Care">Personal Care</option> <option value="Debt/Loan">Debt/Loan Payment</option> <option value="Investment/Savings">Investment/Savings</option> <option value="Other">Other</option> </select> </div> <button class="btn" id="add-expense"><i class="fas fa-plus"></i> Add Expense</button> </div> </div>
+            <!-- Sections: Calculators, Results, Savings, Credit, Promo, History -->
+            <div class="calculator-container"> <div class="calculator-section fade-in"> <h2 class="section-title"><i class="fas fa-money-bill-wave"></i> Salary Calculator</h2> <div class="form-group"> <label for="gross-salary">Annual Gross Salary (₹)</label> <input type="number" id="gross-salary" placeholder="Enter annual gross salary"> </div> <div class="form-group"> <label for="monthly-salary">Monthly Gross Salary (₹)</label> <input type="number" id="monthly-salary" placeholder="Auto-calculated" readonly> </div> <div class="form-group"> <label for="regime">Tax Regime</label> <select id="regime"> <option value="new">New Tax Regime (Default - AY 2025-26)</option> <option value="old">Old Tax Regime (AY 2025-26)</option> </select> </div> <div class="form-group"> <label for="age-group">Age Group</label> <select id="age-group"> <option value="general">Below 60 years</option> <option value="senior">60 to 79 years</option> <option value="super-senior">80 years and above</option> </select> </div> <div class="form-group"> <label for="other-deductions">Monthly Post-Tax Deductions (₹)</label> <input type="number" id="other-deductions" placeholder="e.g., PF, Loan EMI" value="0"> </div> <button class="btn btn-calculate" id="calculate-salary"><i class="fas fa-calculator"></i> Calculate</button> <div class="tax-info"> <h4>Income Tax Slabs (AY 2025-26) <a href="https://www.incometax.gov.in/iec/foportal/help/individual/return-applicable-1" target="_blank" title="Go to Income Tax Dept. Website">Source <i class="fas fa-external-link-alt fa-xs"></i></a></h4> <div id="tax-slab-info"></div> <p style="font-size: 0.8rem; color: #666; margin-top: 10px;">*Std. Ded. ₹50k. Rebate & Surcharge apply per rules. Cess @ 4%.</p> </div> </div> <div class="calculator-section fade-in"> <h2 class="section-title"><i class="fas fa-receipt"></i> Monthly Expense Tracker</h2> <div class="form-group"> <label for="expense-name">Expense Name</label> <input type="text" id="expense-name" placeholder="e.g., Rent"> </div> <div class="form-group"> <label for="expense-amount">Amount (₹)</label> <input type="number" id="expense-amount" placeholder="Enter amount"> </div> <div class="form-group"> <label for="expense-category">Category</label> <select id="expense-category"> <option value="Housing">Housing</option> <option value="Food">Food</option> <option value="Transportation">Transportation</option> <option value="Utilities">Utilities</option> <option value="Entertainment">Entertainment</option> <option value="Health">Health</option> <option value="Personal Care">Personal Care</option> <option value="Debt/Loan">Debt/Loan Payment</option> <option value="Investment/Savings">Investment/Savings</option> <option value="Other">Other</option> </select> </div> <button class="btn" id="add-expense"><i class="fas fa-plus"></i> Add Expense</button> </div> </div>
             <div class="results-section hidden" id="salary-results"> <h2 class="section-title"><i class="fas fa-chart-pie"></i> Salary Breakdown (Monthly)</h2> <div class="results-grid"> <div class="result-card"> <h3>Gross Salary</h3> <p id="monthly-gross-salary-result">₹0.00</p> </div> <div class="result-card"> <h3>Income Tax</h3> <p id="tax-deduction">₹0.00</p> </div> <div class="result-card"> <h3>Other Deductions</h3> <p id="other-deductions-result">₹0.00</p> </div> <div class="result-card total-card"> <h3>Net Salary</h3> <p id="net-salary">₹0.00</p> </div> </div> <div class="tax-info" id="detailed-tax-breakdown"> <h4>Detailed Annual Tax Calculation (AY 2025-26)</h4> <div id="tax-calculation-steps"></div> </div> </div>
             <div class="results-section fade-in" id="expense-results"> <h2 class="section-title"><i class="fas fa-list-alt"></i> Expense Summary (Monthly)</h2> <div class="results-grid"> <div class="result-card"> <h3>Total Expenses</h3> <p id="total-expenses">₹0.00</p> </div> <div class="result-card"> <h3>Remaining Balance</h3> <p id="remaining-balance">₹0.00</p> </div> </div> <div class="expense-list"> <h3>Your Monthly Expenses</h3> <div id="expenses-list"><p style="text-align: center; color: #666; padding: 1rem;">No expenses added yet</p></div> </div> </div>
             <div class="savings-section fade-in"> <h2 class="section-title"><i class="fas fa-piggy-bank"></i> Savings & Investment Options</h2> <div class="savings-card"> <img src="https://static-asset.inc42.com/logo/jar-app.png" alt="JAR App Logo" class="savings-logo" id="jar-logo"> <div class="savings-content"> <h3>Invest in Digital Gold with JAR</h3> <p>Save small amounts or invest surplus in 24K digital gold via the JAR app.</p> <button class="btn btn-gold" id="calculate-savings"><i class="fas fa-coins"></i> Estimate Gold Savings</button> </div> </div> <div id="savings-result" class="hidden fade-in" style="margin-bottom: 1.5rem;"> <div class="result-card" style="border-left-color: var(--gold-color);"> <h3>Potential Gold Savings</h3> <p id="gold-savings">₹0.00</p> <small>Based on current remaining balance.</small> </div> </div> <div class="savings-card"> <img src="https://media.glassdoor.com/sqll/2957938/coindcx-squareLogo-1632632394907.png" alt="CoinDCX Logo" class="savings-logo crypto-logo" id="coindcx-logo"> <div class="savings-content"> <h3>Explore Crypto Investment with CoinDCX</h3> <p>Interested in cryptocurrencies? Explore options on CoinDCX, a popular Indian exchange.</p> <button class="btn btn-crypto" id="explore-crypto"><i class="fab fa-bitcoin"></i> Go to CoinDCX</button> </div> </div> <p style="font-size: 0.8rem; color: #666; margin-top: 10px; text-align: center;">Disclaimer: Crypto investments are subject to market risk. DYOR.</p> </div>
             <div class="credit-section fade-in"> <h2 class="section-title"><i class="fas fa-credit-card"></i> Credit Score Check</h2> <div class="credit-card"> <img src="https://media.umangapp.in/app/ico/service/cibil.png" alt="CIBIL Logo via UMANG" class="credit-logo" id="cibil-logo"> <div class="credit-content"> <h3>Check Your CIBIL Score via UMANG</h3> <p>Monitor your credit health. Access your CIBIL score conveniently via UMANG.</p> <button class="btn btn-credit" id="check-credit"><i class="fas fa-external-link-alt"></i> Check CIBIL Score</button> </div> </div> </div>
             <div class="promo-section fade-in"> <div class="promo-card"> <img src="https://th.bing.com/th/id/OIP.yNUyvJfep0K8W-qU86lOfQAAAA?rs=1&pid=ImgDetMain" alt="Tata Neu App Logo" class="promo-logo" id="tata-neu-logo-personal"> <div class="promo-content"> <h3>Need a Personal Loan?</h3> <p>Explore quick and easy personal loan options through the Tata Neu app.</p> <button class="btn btn-tata-neu" id="tata-neu-button-personal"><i class="fas fa-rupee-sign"></i> Explore Tata Neu Loans</button> </div> </div> </div>
             <div class="history-section fade-in"> <h2 class="section-title"><i class="fas fa-history"></i> Calculation History</h2> <p style="font-size: 0.9rem; color: #666; margin-bottom: 1rem;">Summary of past calculations (stored locally).</p> <div id="history-list"><p style="text-align: center; color: #666; padding: 1rem;">No history available yet</p></div> <button class="btn" id="clear-history" style="display: none;"><i class="fas fa-trash-alt"></i> Clear History</button> </div>
+            <div class="adsense-banner-placeholder">
+                <p>Advertisement</p>
+                <!-- Remember to replace YOUR_ADSENSE_PUBLISHER_ID and YOUR_AD_SLOT_ID_PERSONAL -->
+                <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-YOUR_ADSENSE_PUBLISHER_ID" data-ad-slot="YOUR_AD_SLOT_ID_PERSONAL" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+            </div>
         </div>
 
         <!-- ======================= -->
         <!-- Business Finance Tab    -->
         <!-- ======================= -->
         <div class="tab-content" id="business-tab">
-             <!-- Content as before -->
              <div class="calculator-container"> <div class="calculator-section fade-in"> <h2 class="section-title"><i class="fas fa-building"></i> Business Payroll (Simplified)</h2> <div class="form-group"> <label for="employee-count">Number of Employees</label> <input type="number" id="employee-count" placeholder="Enter count"> </div> <div class="form-group"> <label for="avg-salary">Avg Monthly Salary/Employee (₹)</label> <input type="number" id="avg-salary" placeholder="Enter average salary"> </div> <div class="form-group"> <label for="business-income">Est. Monthly Gross Profit (₹)</label> <input type="number" id="business-income" placeholder="Profit before expenses/payroll"> </div> <button class="btn btn-calculate" id="calculate-payroll"><i class="fas fa-calculator"></i> Calculate</button> </div> <div class="calculator-section fade-in"> <h2 class="section-title"><i class="fas fa-chart-line"></i> Business Monthly Expenses</h2> <div class="form-group"> <label for="business-expense-name">Expense Name</label> <input type="text" id="business-expense-name" placeholder="e.g., Rent, Marketing"> </div> <div class="form-group"> <label for="business-expense-amount">Amount (₹)</label> <input type="number" id="business-expense-amount" placeholder="Enter amount"> </div> <div class="form-group"> <label for="business-expense-category">Category</label> <select id="business-expense-category"> <option value="Operational">Operational</option> <option value="Marketing">Marketing</option> <option value="Office">Office Supplies/Rent</option> <option value="Utilities">Utilities</option> <option value="Software/Subscriptions">Software/Subscriptions</option> <option value="Travel">Travel</option> <option value="Legal/Professional">Legal/Professional Fees</option> <option value="Other">Other</option> </select> </div> <button class="btn" id="add-business-expense"><i class="fas fa-plus"></i> Add Business Expense</button> </div> </div>
             <div class="results-section hidden" id="business-results"> <h2 class="section-title"><i class="fas fa-file-invoice-dollar"></i> Business Financial Summary (Monthly Estimate)</h2> <p style="font-size: 0.9rem; color: #666; margin-bottom: 1rem;">Note: Business taxes are complex & not calculated. Consult a professional.</p> <div class="results-grid"> <div class="result-card"> <h3>Gross Profit</h3> <p id="business-gross-profit">₹0.00</p> </div> <div class="result-card"> <h3>Total Payroll Cost</h3> <p id="total-payroll">₹0.00</p> </div> <div class="result-card"> <h3>Total Other Expenses</h3> <p id="business-total-expenses">₹0.00</p> </div> <div class="result-card total-card"> <h3>Estimated Net (Before Tax)</h3> <p id="business-estimated-net">₹0.00</p> </div> </div> <div class="expense-list"> <h3>Business Expenses List</h3> <div id="business-expenses-list"><p style="text-align: center; color: #666; padding: 1rem;">No business expenses added yet</p></div> </div> </div>
             <div class="savings-section fade-in"> <h2 class="section-title"><i class="fas fa-piggy-bank"></i> Business Savings & Investment Options</h2> <div class="savings-card"> <img src="https://static-asset.inc42.com/logo/jar-app.png" alt="JAR App Logo" class="savings-logo" id="business-jar-logo"> <div class="savings-content"> <h3>Invest Business Funds in Digital Gold</h3> <p>Consider allocating surplus business funds into digital gold via JAR.</p> <button class="btn btn-gold" id="calculate-business-savings"><i class="fas fa-coins"></i> Estimate Gold Savings</button> </div> </div> <div id="business-savings-result" class="hidden fade-in" style="margin-bottom: 1.5rem;"> <div class="result-card" style="border-left-color: var(--gold-color);"> <h3>Potential Business Gold Savings</h3> <p id="business-gold-savings">₹0.00</p> <small>Based on 10% of estimated net profit. Consult advisor.</small> </div> </div> <div class="savings-card"> <img src="https://media.glassdoor.com/sqll/2957938/coindcx-squareLogo-1632632394907.png" alt="CoinDCX Logo" class="savings-logo crypto-logo" id="business-coindcx-logo"> <div class="savings-content"> <h3>Explore Crypto for Business via CoinDCX</h3> <p>Evaluate cryptocurrency investment options for your business treasury.</p> <button class="btn btn-crypto" id="business-explore-crypto"><i class="fab fa-bitcoin"></i> Go to CoinDCX</button> </div> </div> <p style="font-size: 0.8rem; color: #666; margin-top: 10px; text-align: center;">Disclaimer: Business investments in crypto carry significant risk. Consult advisors.</p> </div>
             <div class="credit-section fade-in"> <h2 class="section-title"><i class="fas fa-credit-card"></i> Business Credit Check</h2> <div class="credit-card"> <img src="https://media.umangapp.in/app/ico/service/cibil.png" alt="CIBIL Logo via UMANG" class="credit-logo" id="business-cibil-logo"> <div class="credit-content"> <h3>Check Your Business CIBIL Rank via UMANG</h3> <p>Monitor your business's creditworthiness. Access CIBIL Rank & CCR.</p> <button class="btn btn-credit" id="check-business-credit"><i class="fas fa-external-link-alt"></i> Check Business CIBIL</button> </div> </div> </div>
             <div class="promo-section fade-in"> <div class="promo-card"> <img src="https://th.bing.com/th/id/OIP.yNUyvJfep0K8W-qU86lOfQAAAA?rs=1&pid=ImgDetMain" alt="Tata Neu App Logo" class="promo-logo" id="tata-neu-logo-business"> <div class="promo-content"> <h3>Need Business Financing?</h3> <p>While Tata Neu focuses on personal loans, explore other business loan options if needed.</p> <button class="btn btn-tata-neu" id="tata-neu-button-business"><i class="fas fa-rupee-sign"></i> Explore Tata Neu Loans</button> </div> </div> </div>
+            <div class="adsense-banner-placeholder">
+                <p>Advertisement</p>
+                 <!-- Remember to replace YOUR_ADSENSE_PUBLISHER_ID and YOUR_AD_SLOT_ID_BUSINESS -->
+                <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-YOUR_ADSENSE_PUBLISHER_ID" data-ad-slot="YOUR_AD_SLOT_ID_BUSINESS" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+            </div>
         </div>
 
         <!-- ======================= -->
         <!-- Blog Tab                -->
         <!-- ======================= -->
         <div class="tab-content" id="blog-tab">
-            <!-- EMI Calculator Section -->
              <div class="emi-calculator-section fade-in">
                 <h2 class="section-title"><i class="fas fa-calculator"></i> EMI Calculator</h2>
                 <div class="emi-calculator-grid">
@@ -363,7 +416,7 @@
                             <label for="loan-amount">Loan Amount</label>
                              <div class="input-wrapper">
                                 <span>₹</span>
-                                <input type="text" id="loan-amount" value="50,00,000"> <!-- Use text for better formatting control -->
+                                <input type="text" id="loan-amount" value="50,00,000">
                             </div>
                         </div>
                         <div class="input-group slider-group">
@@ -397,66 +450,55 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Blog Posts Section -->
             <h2 class="section-title" style="margin-top: 3rem;"><i class="fas fa-newspaper"></i> Govt. Schemes & Loan Updates Blog</h2>
             <p style="margin-bottom: 2rem; color: #555;">Stay informed about the latest financial schemes and loan opportunities in India.</p>
             <div class="blog-post fade-in"> <h3>Updates to Pradhan Mantri Mudra Yojana (PMMY)</h3> <span class="post-meta">Source: mudra.org.in</span> <p>MUDRA provides loans up to ₹10 lakh to non-corporate, non-farm small/micro enterprises (Shishu, Kishor, Tarun categories)...</p> <a href="https://www.mudra.org.in/" class="read-more" target="_blank">Visit MUDRA Website <i class="fas fa-external-link-alt fa-xs"></i></a> </div>
             <div class="blog-post fade-in"> <h3>Emergency Credit Line Guarantee Scheme (ECLGS)</h3> <span class="post-meta">Source: ncgtc.in</span> <p>ECLGS provides 100% guarantee coverage by NCGTC to lenders on eligible credit facilities extended to MSMEs & others impacted by COVID-19...</p> <a href="https://www.ncgtc.in/en/product-details/ECLGS/Emergency-Credit-Line-Guarantee-Scheme-(ECLGS)" class="read-more" target="_blank">Visit NCGTC ECLGS Page <i class="fas fa-external-link-alt fa-xs"></i></a> </div>
             <div class="blog-post fade-in"> <h3>National Housing Bank (NHB) Subsidies</h3> <span class="post-meta">Source: nhb.org.in</span> <p>NHB acts as a nodal agency for affordable housing schemes, including routing subsidies under PMAY-U (CLSS for EWS/LIG/MIG)...</p> <a href="https://www.nhb.org.in/" class="read-more" target="_blank">Visit NHB Website <i class="fas fa-external-link-alt fa-xs"></i></a> </div>
             <div class="blog-post fade-in"> <h3>Personal Loans from Public Sector Banks</h3> <span class="post-meta">Example Source: PNB</span> <p>PSBs offer personal loans for various needs. Check individual bank websites for current rates, eligibility & digital options...</p> <a href="https://www.pnbindia.in/personal.aspx" class="read-more" target="_blank">Example: PNB Personal Loans <i class="fas fa-external-link-alt fa-xs"></i></a> </div>
-            <!-- Featured Banks -->
             <div class="bank-list-section fade-in">
                 <h3>Featured Bank Loan Links</h3>
                 <div class="bank-item"> <img src="https://www.razole9.com/Gallery/vcardimages/32992048.png" alt="Union Bank of India Logo" class="bank-logo"> <div class="bank-link"> <a href="https://www.unionbankofindia.co.in/en/listing/personal-loan" target="_blank"> Union Bank - Personal Loans <i class="fas fa-external-link-alt fa-xs"></i> </a> </div> </div>
                  <p style="margin-top: 1.5rem; font-style: italic; color: #888; text-align: center; font-size: 0.9rem;"> More bank links can be featured here.</p>
             </div>
-        </div> <!-- End Blog Tab -->
+            <div class="adsense-banner-placeholder">
+                <p>Advertisement</p>
+                 <!-- Remember to replace YOUR_ADSENSE_PUBLISHER_ID and YOUR_AD_SLOT_ID_BLOG -->
+                <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-YOUR_ADSENSE_PUBLISHER_ID" data-ad-slot="YOUR_AD_SLOT_ID_BLOG" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+            </div>
+        </div>
 
         <!-- ======================= -->
         <!-- Financial Advisers Tab  -->
         <!-- ======================= -->
         <div class="tab-content" id="advisers-tab">
              <h2 class="section-title"><i class="fas fa-users-cog"></i> Find Financial Advisers</h2>
-             <p class="intro-text">Connect with qualified Chartered Accountants (CAs), Lawyers, and Law Firms specializing in Income Tax and financial planning. (Note: Listings below are for demonstration purposes only).</p>
+             <p class="intro-text">Connect with qualified Lawyers and professionals specializing in Income Tax and financial planning.</p>
              <div class="adviser-list-section">
                  <div class="adviser-card fade-in">
-                     <div class="adviser-logo-placeholder">CA</div> <!-- Placeholder Text/Logo -->
-                     <div class="adviser-details">
-                         <h4>A. Kumar & Associates</h4>
-                         <div class="specialization">Chartered Accountants - Income Tax Filing & Planning</div>
-                         <p class="contact-info"><i class="fas fa-map-marker-alt"></i> 123 Financial Street, Mumbai</p>
-                         <p class="contact-info"><i class="fas fa-phone"></i> <a href="tel:+919876543210">+91-9876543210</a></p>
-                         <p class="contact-info"><i class="fas fa-envelope"></i> <a href="mailto:info@akumarca.com">info@akumarca.com</a></p>
-                     </div>
-                     <div class="adviser-map"> <a href="https://www.google.com/maps/search/?api=1&query=123+Financial+Street%2C+Mumbai" target="_blank">View on Map <i class="fas fa-map-marked-alt"></i></a> </div>
-                 </div>
-                  <div class="adviser-card fade-in">
                      <div class="adviser-logo-placeholder">Law</div>
                      <div class="adviser-details">
-                         <h4>Gupta Legal Partners</h4>
-                         <div class="specialization">Tax Lawyers - Advisory & Litigation</div>
-                         <p class="contact-info"><i class="fas fa-map-marker-alt"></i> 456 Commerce Ave, Delhi</p>
-                         <p class="contact-info"><i class="fas fa-phone"></i> <a href="tel:+919123456789">+91-9123456789</a></p>
-                         <p class="contact-info"><i class="fas fa-envelope"></i> <a href="mailto:contact@guptalegal.in">contact@guptalegal.in</a></p>
+                         <!-- NAME CHANGED HERE -->
+                         <h4>Jammi. Vamsi Krishna Mohan</h4>
+                         <div class="specialization">Advocate - Tax Lawyers - Advisory & Litigation</div>
+                         <p class="contact-info"><i class="fas fa-map-marker-alt"></i> D.No.19-2-15, Gurachari st, Vizianagaram</p>
+                         <p class="contact-info"><i class="fas fa-phone"></i> <a href="tel:+917075856077">+91-7075856077</a></p>
+                         <p class="contact-info"><i class="fas fa-envelope"></i> <a href="mailto:leokrish69076@gmail.com">leokrish69076@gmail.com</a></p>
                      </div>
-                     <div class="adviser-map"> <a href="https://www.google.com/maps/search/?api=1&query=456+Commerce+Ave%2C+Delhi" target="_blank">View on Map <i class="fas fa-map-marked-alt"></i></a> </div>
-                  </div>
-                  <div class="adviser-card fade-in">
-                     <div class="adviser-logo-placeholder">Firm</div>
-                     <div class="adviser-details">
-                         <h4>FinTax Solutions LLP</h4>
-                         <div class="specialization">Comprehensive Financial & Tax Services</div>
-                         <p class="contact-info"><i class="fas fa-map-marker-alt"></i> 789 Biz Hub, Bengaluru</p>
-                         <p class="contact-info"><i class="fas fa-phone"></i> <a href="tel:+919988776655">+91-9988776655</a></p>
-                         <p class="contact-info"><i class="fas fa-envelope"></i> <a href="mailto:enquiry@fintaxllp.com">enquiry@fintaxllp.com</a></p>
+                     <div class="adviser-map">
+                         <a href="https://www.google.com/maps/search/?api=1&query=D.No.19-2-15%2C+Gurachari+st%2C+Vizianagaram" target="_blank">View on Map <i class="fas fa-map-marked-alt"></i></a>
                      </div>
-                     <div class="adviser-map"> <a href="https://www.google.com/maps/search/?api=1&query=789+Biz+Hub%2C+Bengaluru" target="_blank">View on Map <i class="fas fa-map-marked-alt"></i></a> </div>
-                  </div>
-                 <p style="margin-top: 1.5rem; font-style: italic; color: #888; text-align: center; font-size: 0.9rem;"> This is a demo listing. Verify credentials before engaging any adviser. </p>
+                 </div>
              </div>
              <div class="promo-section fade-in" style="margin-top: 2rem;"> <div class="promo-card"> <img src="https://th.bing.com/th/id/OIP.yNUyvJfep0K8W-qU86lOfQAAAA?rs=1&pid=ImgDetMain" alt="Tata Neu App Logo" class="promo-logo" id="tata-neu-logo-advisers"> <div class="promo-content"> <h3>Need Quick Funds?</h3> <p>Tata Neu offers personal loans that might suit your needs. Explore their options.</p> <button class="btn btn-tata-neu" id="tata-neu-button-advisers"><i class="fas fa-rupee-sign"></i> Explore Tata Neu Loans</button> </div> </div> </div>
-        </div> <!-- End Advisers Tab -->
+             <div class="adsense-banner-placeholder">
+                 <p>Advertisement</p>
+                  <!-- Remember to replace YOUR_ADSENSE_PUBLISHER_ID and YOUR_AD_SLOT_ID_ADVISERS -->
+                 <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-YOUR_ADSENSE_PUBLISHER_ID" data-ad-slot="YOUR_AD_SLOT_ID_ADVISERS" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                 <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+             </div>
+        </div>
 
         <!-- ======================= -->
         <!-- Contact Banner          -->
@@ -494,175 +536,73 @@
             const HISTORY_STORAGE_KEY = 'financeHistory_v4';
 
             // --- Tax Slabs & Surcharge Rates (AY 2025-26) ---
-            const taxSlabs_AY2025_26 = { /* ... Data is accurate ... */ new: { slabs: [ { from: 0, to: 300000, rate: 0 }, { from: 300001, to: 700000, rate: 5 }, { from: 700001, to: 1000000, rate: 10 }, { from: 1000001, to: 1200000, rate: 15 }, { from: 1200001, to: 1500000, rate: 20 }, { from: 1500001, to: Infinity, rate: 30 } ], rebateLimit: 700000, rebateAmount: 25000 }, old: { general: { slabs: [ { from: 0, to: 250000, rate: 0 }, { from: 250001, to: 500000, rate: 5 }, { from: 500001, to: 1000000, rate: 20 }, { from: 1000001, to: Infinity, rate: 30 } ], rebateLimit: 500000, rebateAmount: 12500 }, senior: { slabs: [ { from: 0, to: 300000, rate: 0 }, { from: 300001, to: 500000, rate: 5 }, { from: 500001, to: 1000000, rate: 20 }, { from: 1000001, to: Infinity, rate: 30 } ], rebateLimit: 500000, rebateAmount: 12500 }, superSenior: { slabs: [ { from: 0, to: 500000, rate: 0 }, { from: 500001, to: 1000000, rate: 20 }, { from: 1000001, to: Infinity, rate: 30 } ], rebateLimit: 500000, rebateAmount: 0 } } };
-            const surchargeRates = { /* ... Data is accurate ... */ new: [ { limit: 5000000, rate: 0.10 }, { limit: 10000000, rate: 0.15 }, { limit: 20000000, rate: 0.25 } ], old: [ { limit: 5000000, rate: 0.10 }, { limit: 10000000, rate: 0.15 }, { limit: 20000000, rate: 0.25 }, { limit: 50000000, rate: 0.37 } ] };
+            const taxSlabs_AY2025_26 = { new: { slabs: [ { from: 0, to: 300000, rate: 0 }, { from: 300001, to: 700000, rate: 5 }, { from: 700001, to: 1000000, rate: 10 }, { from: 1000001, to: 1200000, rate: 15 }, { from: 1200001, to: 1500000, rate: 20 }, { from: 1500001, to: Infinity, rate: 30 } ], rebateLimit: 700000, rebateAmount: 25000 }, old: { general: { slabs: [ { from: 0, to: 250000, rate: 0 }, { from: 250001, to: 500000, rate: 5 }, { from: 500001, to: 1000000, rate: 20 }, { from: 1000001, to: Infinity, rate: 30 } ], rebateLimit: 500000, rebateAmount: 12500 }, senior: { slabs: [ { from: 0, to: 300000, rate: 0 }, { from: 300001, to: 500000, rate: 5 }, { from: 500001, to: 1000000, rate: 20 }, { from: 1000001, to: Infinity, rate: 30 } ], rebateLimit: 500000, rebateAmount: 12500 }, superSenior: { slabs: [ { from: 0, to: 500000, rate: 0 }, { from: 500001, to: 1000000, rate: 20 }, { from: 1000001, to: Infinity, rate: 30 } ], rebateLimit: 500000, rebateAmount: 0 } } };
+            const surchargeRates = { new: [ { limit: 5000000, rate: 0.10 }, { limit: 10000000, rate: 0.15 }, { limit: 20000000, rate: 0.25 } ], old: [ { limit: 5000000, rate: 0.10 }, { limit: 10000000, rate: 0.15 }, { limit: 20000000, rate: 0.25 }, { limit: 50000000, rate: 0.37 } ] };
 
             // --- DOM Elements ---
-            const DOMElements = { /* ... Grouped elements are accurate ... */
-                personal: { grossSalary: document.getElementById('gross-salary'), monthlySalary: document.getElementById('monthly-salary'), regime: document.getElementById('regime'), ageGroup: document.getElementById('age-group'), otherDeductions: document.getElementById('other-deductions'), calculateSalaryBtn: document.getElementById('calculate-salary'), taxSlabInfo: document.getElementById('tax-slab-info'), salaryResults: document.getElementById('salary-results'), monthlyGrossResult: document.getElementById('monthly-gross-salary-result'), taxResult: document.getElementById('tax-deduction'), otherDedResult: document.getElementById('other-deductions-result'), netResult: document.getElementById('net-salary'), taxSteps: document.getElementById('tax-calculation-steps'), expenseName: document.getElementById('expense-name'), expenseAmount: document.getElementById('expense-amount'), expenseCategory: document.getElementById('expense-category'), addExpenseBtn: document.getElementById('add-expense'), expensesList: document.getElementById('expenses-list'), totalExpenses: document.getElementById('total-expenses'), remainingBalance: document.getElementById('remaining-balance'), calcSavingsBtn: document.getElementById('calculate-savings'), savingsResult: document.getElementById('savings-result'), goldSavings: document.getElementById('gold-savings'), jarLogo: document.getElementById('jar-logo'), coindcxLogo: document.getElementById('coindcx-logo'), exploreCryptoBtn: document.getElementById('explore-crypto'), checkCreditBtn: document.getElementById('check-credit'), cibilLogo: document.getElementById('cibil-logo'), historyList: document.getElementById('history-list'), clearHistoryBtn: document.getElementById('clear-history'), tataNeuLogo: document.getElementById('tata-neu-logo-personal'), tataNeuButton: document.getElementById('tata-neu-button-personal') },
-                business: { empCount: document.getElementById('employee-count'), avgSalary: document.getElementById('avg-salary'), income: document.getElementById('business-income'), calcPayrollBtn: document.getElementById('calculate-payroll'), expenseName: document.getElementById('business-expense-name'), expenseAmount: document.getElementById('business-expense-amount'), expenseCategory: document.getElementById('business-expense-category'), addExpenseBtn: document.getElementById('add-business-expense'), results: document.getElementById('business-results'), grossProfit: document.getElementById('business-gross-profit'), totalPayroll: document.getElementById('total-payroll'), totalExpenses: document.getElementById('business-total-expenses'), estimatedNet: document.getElementById('business-estimated-net'), expensesList: document.getElementById('business-expenses-list'), calcSavingsBtn: document.getElementById('calculate-business-savings'), savingsResult: document.getElementById('business-savings-result'), goldSavings: document.getElementById('business-gold-savings'), jarLogo: document.getElementById('business-jar-logo'), coindcxLogo: document.getElementById('business-coindcx-logo'), exploreCryptoBtn: document.getElementById('business-explore-crypto'), checkCreditBtn: document.getElementById('check-business-credit'), cibilLogo: document.getElementById('business-cibil-logo'), tataNeuLogo: document.getElementById('tata-neu-logo-business'), tataNeuButton: document.getElementById('tata-neu-button-business') },
-                advisers: { tataNeuLogo: document.getElementById('tata-neu-logo-advisers'), tataNeuButton: document.getElementById('tata-neu-button-advisers') },
-                emi: { loanAmountInput: document.getElementById('loan-amount'), interestRateSlider: document.getElementById('interest-rate-slider'), interestRateValue: document.getElementById('interest-rate-value'), loanDurationSlider: document.getElementById('loan-duration-slider'), loanDurationValue: document.getElementById('loan-duration-value'), emiOutput: document.getElementById('emi-output'), principalOutput: document.getElementById('principal-output'), interestOutput: document.getElementById('interest-output'), totalPayableOutput: document.getElementById('total-payable-output'), chartCanvas: document.getElementById('emiChart') },
-                shared: { tabs: document.querySelectorAll('.tab'), tabContents: document.querySelectorAll('.tab-content'), container: document.querySelector('.container') }
-             };
+            const DOMElements = { personal: { grossSalary: document.getElementById('gross-salary'), monthlySalary: document.getElementById('monthly-salary'), regime: document.getElementById('regime'), ageGroup: document.getElementById('age-group'), otherDeductions: document.getElementById('other-deductions'), calculateSalaryBtn: document.getElementById('calculate-salary'), taxSlabInfo: document.getElementById('tax-slab-info'), salaryResults: document.getElementById('salary-results'), monthlyGrossResult: document.getElementById('monthly-gross-salary-result'), taxResult: document.getElementById('tax-deduction'), otherDedResult: document.getElementById('other-deductions-result'), netResult: document.getElementById('net-salary'), taxSteps: document.getElementById('tax-calculation-steps'), expenseName: document.getElementById('expense-name'), expenseAmount: document.getElementById('expense-amount'), expenseCategory: document.getElementById('expense-category'), addExpenseBtn: document.getElementById('add-expense'), expensesList: document.getElementById('expenses-list'), totalExpenses: document.getElementById('total-expenses'), remainingBalance: document.getElementById('remaining-balance'), calcSavingsBtn: document.getElementById('calculate-savings'), savingsResult: document.getElementById('savings-result'), goldSavings: document.getElementById('gold-savings'), jarLogo: document.getElementById('jar-logo'), coindcxLogo: document.getElementById('coindcx-logo'), exploreCryptoBtn: document.getElementById('explore-crypto'), checkCreditBtn: document.getElementById('check-credit'), cibilLogo: document.getElementById('cibil-logo'), historyList: document.getElementById('history-list'), clearHistoryBtn: document.getElementById('clear-history'), tataNeuLogo: document.getElementById('tata-neu-logo-personal'), tataNeuButton: document.getElementById('tata-neu-button-personal') }, business: { empCount: document.getElementById('employee-count'), avgSalary: document.getElementById('avg-salary'), income: document.getElementById('business-income'), calcPayrollBtn: document.getElementById('calculate-payroll'), expenseName: document.getElementById('business-expense-name'), expenseAmount: document.getElementById('business-expense-amount'), expenseCategory: document.getElementById('business-expense-category'), addExpenseBtn: document.getElementById('add-business-expense'), results: document.getElementById('business-results'), grossProfit: document.getElementById('business-gross-profit'), totalPayroll: document.getElementById('total-payroll'), totalExpenses: document.getElementById('business-total-expenses'), estimatedNet: document.getElementById('business-estimated-net'), expensesList: document.getElementById('business-expenses-list'), calcSavingsBtn: document.getElementById('calculate-business-savings'), savingsResult: document.getElementById('business-savings-result'), goldSavings: document.getElementById('business-gold-savings'), jarLogo: document.getElementById('business-jar-logo'), coindcxLogo: document.getElementById('business-coindcx-logo'), exploreCryptoBtn: document.getElementById('business-explore-crypto'), checkCreditBtn: document.getElementById('check-business-credit'), cibilLogo: document.getElementById('business-cibil-logo'), tataNeuLogo: document.getElementById('tata-neu-logo-business'), tataNeuButton: document.getElementById('tata-neu-button-business') }, advisers: { tataNeuLogo: document.getElementById('tata-neu-logo-advisers'), tataNeuButton: document.getElementById('tata-neu-button-advisers') }, emi: { loanAmountInput: document.getElementById('loan-amount'), interestRateSlider: document.getElementById('interest-rate-slider'), interestRateValue: document.getElementById('interest-rate-value'), loanDurationSlider: document.getElementById('loan-duration-slider'), loanDurationValue: document.getElementById('loan-duration-value'), emiOutput: document.getElementById('emi-output'), principalOutput: document.getElementById('principal-output'), interestOutput: document.getElementById('interest-output'), totalPayableOutput: document.getElementById('total-payable-output'), chartCanvas: document.getElementById('emiChart') }, shared: { tabs: document.querySelectorAll('.tab'), tabContents: document.querySelectorAll('.tab-content'), container: document.querySelector('.container') } };
 
             // --- Global State ---
             let personalExpenses = []; let totalPersonalMonthlyExpenses = 0; let currentMonthlyNetSalary = 0;
             let calculationHistory = [];
             let businessExpenses = []; let totalBusinessMonthlyExpenses = 0;
             let emiChart = null;
+            // let chatHistory = []; // Removed Chatbot State
 
             // --- Helper Functions ---
             const formatCurrency = (amount) => { if (isNaN(amount) || amount === null || amount === undefined) amount = 0; return '₹ ' + amount.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); };
             const openLink = (url) => window.open(url, '_blank');
-            const formatInputValue = (inputElement) => { // Format input with commas
-                 let value = parseFloat(inputElement.value.replace(/,/g, '')) || 0;
-                 inputElement.value = value.toLocaleString('en-IN');
-            };
+            const formatInputValue = (inputElement) => { let value = parseFloat(inputElement.value.replace(/,/g, '')) || 0; inputElement.value = value.toLocaleString('en-IN'); };
 
             // --- Tax Calculation Logic (AY 2025-26) ---
-            const calculateIncomeTax_AY2025_26 = (grossAnnualSalary, regime, ageGroup) => { /* ... Function is accurate ... */ const steps = []; let taxableIncome = Math.max(0, grossAnnualSalary - STANDARD_DEDUCTION); steps.push(`Gross Annual Salary: ${formatCurrency(grossAnnualSalary)}`); steps.push(`(-) Standard Deduction: ${formatCurrency(STANDARD_DEDUCTION)}`); steps.push(`<strong>Taxable Income: ${formatCurrency(taxableIncome)}</strong>`); steps.push(`<br>`); let regimeConfig, slabs, regimeLabel = ''; if (regime === 'new') { regimeConfig = taxSlabs_AY2025_26.new; slabs = regimeConfig.slabs; regimeLabel = 'New (Default)'; } else { regimeLabel = 'Old'; if (ageGroup === 'general') regimeConfig = taxSlabs_AY2025_26.old.general; else if (ageGroup === 'senior') regimeConfig = taxSlabs_AY2025_26.old.senior; else regimeConfig = taxSlabs_AY2025_26.old.superSenior; slabs = regimeConfig.slabs; } steps.push(`Regime Selected: ${regimeLabel} (${ageGroup})`); steps.push(`<br>`); let baseTax = 0; steps.push(`<strong>Tax Slab Calculation:</strong>`); let remainingInc = taxableIncome; for (const slab of slabs) { if (remainingInc <= 0) break; const slabLowerBound = slab.from; const incomeInThisSlabRange = Math.max(0, (slab.to === Infinity ? Infinity : slab.to) - slabLowerBound); const incomeTaxedInThisSlab = Math.min(remainingInc, incomeInThisSlabRange); if (incomeTaxedInThisSlab > 0) { const taxInSlab = incomeTaxedInThisSlab * (slab.rate / 100); baseTax += taxInSlab; const fromDisp = formatCurrency(slab.from + (slab.from > 0 ? 1 : 0)); const toDisp = slab.to === Infinity ? 'Above' : formatCurrency(slab.to); steps.push(`  ${fromDisp} - ${toDisp}: ${formatCurrency(incomeTaxedInThisSlab)} @ ${slab.rate}% = ${formatCurrency(taxInSlab)}`); remainingInc -= incomeTaxedInThisSlab; } } steps.push(`<strong>Base Tax: ${formatCurrency(baseTax)}</strong>`); steps.push(`<br>`); let rebate = 0; if (taxableIncome <= regimeConfig.rebateLimit && baseTax > 0) { rebate = Math.min(baseTax, regimeConfig.rebateAmount); steps.push(`(-) Rebate u/s 87A: ${formatCurrency(rebate)}`); } else { steps.push(`Rebate u/s 87A: N/A`); } let taxAfterRebate = Math.max(0, baseTax - rebate); steps.push(`Tax After Rebate: ${formatCurrency(taxAfterRebate)}`); steps.push(`<br>`); let surcharge = 0, surchargeRate = 0; const applicableSurchargeRates = regime === 'new' ? surchargeRates.new : surchargeRates.old; for (const r of applicableSurchargeRates) { if (taxableIncome > r.limit) surchargeRate = r.rate; else break; } if (surchargeRate > 0) { surcharge = taxAfterRebate * surchargeRate; steps.push(`(+) Surcharge @ ${surchargeRate * 100}%: ${formatCurrency(surcharge)}`); } else { steps.push(`Surcharge: N/A`); } let taxPlusSurcharge = taxAfterRebate + surcharge; steps.push(`Tax + Surcharge: ${formatCurrency(taxPlusSurcharge)}`); steps.push(`<br>`); let cess = taxPlusSurcharge * HEALTH_EDUCATION_CESS_RATE; steps.push(`(+) Health & Edu Cess @ 4%: ${formatCurrency(cess)}`); steps.push(`<br>`); let totalTax = taxPlusSurcharge + cess; steps.push(`<strong>Total Annual Tax: ${formatCurrency(totalTax)}</strong>`); return { totalTax, taxableIncome, calculationSteps: steps }; };
+            const calculateIncomeTax_AY2025_26 = (grossAnnualSalary, regime, ageGroup) => { const steps = []; let taxableIncome = Math.max(0, grossAnnualSalary - STANDARD_DEDUCTION); steps.push(`Gross Annual Salary: ${formatCurrency(grossAnnualSalary)}`); steps.push(`(-) Standard Deduction: ${formatCurrency(STANDARD_DEDUCTION)}`); steps.push(`<strong>Taxable Income: ${formatCurrency(taxableIncome)}</strong>`); steps.push(`<br>`); let regimeConfig, slabs, regimeLabel = ''; let ageName = ''; // Initialize ageName here
+            if (regime === 'new') { regimeConfig = taxSlabs_AY2025_26.new; slabs = regimeConfig.slabs; regimeLabel = 'New (Default)'; } else { regimeLabel = 'Old'; let config; if (ageGroup === 'general') { config = taxSlabs_AY2025_26.old.general; ageName = ' (< 60)'; } else if (ageGroup === 'senior') { config = taxSlabs_AY2025_26.old.senior; ageName = ' (60-79)'; } else { config = taxSlabs_AY2025_26.old.superSenior; ageName = ' (80+)'; } regimeConfig = config; slabs = config.slabs; } steps.push(`Regime Selected: ${regimeLabel}${ageName}`); steps.push(`<br>`); let baseTax = 0; steps.push(`<strong>Tax Slab Calculation:</strong>`); let remainingInc = taxableIncome; for (const slab of slabs) { if (remainingInc <= 0) break; const slabLowerBound = slab.from; const incomeInThisSlabRange = Math.max(0, (slab.to === Infinity ? Infinity : slab.to) - slabLowerBound); const incomeTaxedInThisSlab = Math.min(remainingInc, incomeInThisSlabRange); if (incomeTaxedInThisSlab > 0) { const taxInSlab = incomeTaxedInThisSlab * (slab.rate / 100); baseTax += taxInSlab; const fromDisp = formatCurrency(slab.from === 0 ? 0 : slab.from + 1); const toDisp = slab.to === Infinity ? 'Above' : formatCurrency(slab.to); steps.push(`  ${fromDisp} - ${toDisp}: ${formatCurrency(incomeTaxedInThisSlab)} @ ${slab.rate}% = ${formatCurrency(taxInSlab)}`); remainingInc -= incomeTaxedInThisSlab; } } steps.push(`<strong>Base Tax: ${formatCurrency(baseTax)}</strong>`); steps.push(`<br>`); let rebate = 0; if (taxableIncome <= regimeConfig.rebateLimit && baseTax > 0) { rebate = Math.min(baseTax, regimeConfig.rebateAmount); steps.push(`(-) Rebate u/s 87A: ${formatCurrency(rebate)}`); } else { steps.push(`Rebate u/s 87A: N/A`); } let taxAfterRebate = Math.max(0, baseTax - rebate); steps.push(`Tax After Rebate: ${formatCurrency(taxAfterRebate)}`); steps.push(`<br>`); let surcharge = 0, surchargeRate = 0; const applicableSurchargeRates = regime === 'new' ? surchargeRates.new : surchargeRates.old; for (const r of applicableSurchargeRates) { if (taxableIncome > r.limit) surchargeRate = r.rate; else break; } if (surchargeRate > 0) { surcharge = taxAfterRebate * surchargeRate; steps.push(`(+) Surcharge @ ${surchargeRate * 100}%: ${formatCurrency(surcharge)}`); } else { steps.push(`Surcharge: N/A`); } let taxPlusSurcharge = taxAfterRebate + surcharge; steps.push(`Tax + Surcharge: ${formatCurrency(taxPlusSurcharge)}`); steps.push(`<br>`); let cess = taxPlusSurcharge * HEALTH_EDUCATION_CESS_RATE; steps.push(`(+) Health & Edu Cess @ 4%: ${formatCurrency(cess)}`); steps.push(`<br>`); let totalTax = taxPlusSurcharge + cess; steps.push(`<strong>Total Annual Tax: ${formatCurrency(totalTax)}</strong>`); return { totalTax, taxableIncome, calculationSteps: steps }; };
 
             // --- EMI Calculation Logic ---
-            const calculateEMI = (principal, annualRate, years) => { /* ... Function is accurate ... */ if (principal <= 0 || years <= 0) { return { emi: 0, totalInterest: 0, totalPayable: principal }; } if (annualRate <= 0) { const totalPayable = principal; const emi = principal / (years * 12); return { emi, totalInterest: 0, totalPayable }; } const monthlyRate = annualRate / 12 / 100; const n = years * 12; const emi = principal * monthlyRate * Math.pow(1 + monthlyRate, n) / (Math.pow(1 + monthlyRate, n) - 1); const totalPayable = emi * n; const totalInterest = totalPayable - principal; return { emi, totalInterest, totalPayable }; };
+            const calculateEMI = (principal, annualRate, years) => { if (principal <= 0 || years <= 0) { return { emi: 0, totalInterest: 0, totalPayable: principal }; } if (annualRate <= 0) { const totalPayable = principal; const emi = principal / (years * 12); return { emi, totalInterest: 0, totalPayable }; } const monthlyRate = annualRate / 12 / 100; const n = years * 12; const emi = principal * monthlyRate * Math.pow(1 + monthlyRate, n) / (Math.pow(1 + monthlyRate, n) - 1); const totalPayable = emi * n; const totalInterest = totalPayable - principal; return { emi, totalInterest, totalPayable }; };
 
             // --- UI Update Functions ---
-            const updateTaxSlabInfo = () => { /* ... Function is accurate ... */ const el = DOMElements.personal; const regime = el.regime.value; const ageGroup = el.ageGroup.value; let slabs, config; let regimeName = regime === 'new' ? 'New' : 'Old'; let ageName = ''; if (regime === 'new') { config = taxSlabs_AY2025_26.new; slabs = config.slabs; } else { if (ageGroup === 'general') { config = taxSlabs_AY2025_26.old.general; ageName = ' (< 60)'; } else if (ageGroup === 'senior') { config = taxSlabs_AY2025_26.old.senior; ageName = ' (60-79)'; } else { config = taxSlabs_AY2025_26.old.superSenior; ageName = ' (80+)'; } slabs = config.slabs; } let html = `<p style="font-weight: 600; margin-bottom: 8px;">${regimeName} Regime${ageName}</p>`; slabs.forEach(s => { const f = formatCurrency(s.from + (s.from > 0 ? 1 : 0)); const t = s.to === Infinity ? 'Above' : formatCurrency(s.to); html += `<div class="tax-slab"><span>${f} - ${t}</span><span>${s.rate}%</span></div>`; }); html += `<p style="font-weight: 600; margin-top: 10px; margin-bottom: 5px;">Rebate u/s 87A:</p><div class="tax-slab"><span>Max ${formatCurrency(config.rebateAmount)}</span><span>if income ≤ ${formatCurrency(config.rebateLimit)}</span></div>`; const rates = regime === 'new' ? surchargeRates.new : surchargeRates.old; html += `<p style="font-weight: 600; margin-top: 10px; margin-bottom: 5px;">Surcharge:</p>`; rates.forEach(r => { html += `<div class="tax-slab"><span>Income > ${formatCurrency(r.limit)}</span><span>${r.rate * 100}% on Tax</span></div>`; }); el.taxSlabInfo.innerHTML = html; };
-            const updatePersonalRemainingBalance = () => { /* ... Function is accurate ... */ const el = DOMElements.personal; const remaining = currentMonthlyNetSalary - totalPersonalMonthlyExpenses; el.remainingBalance.textContent = formatCurrency(remaining); el.remainingBalance.style.color = remaining < 0 ? 'var(--warning-color)' : (remaining > 0 ? 'var(--success-color)' : 'var(--primary-color)'); };
-
-            // EMI UI Update
-            const updateEMICalculatorUI = () => {
-                 const ui = DOMElements.emi;
-                 // Read principal, removing commas for calculation
-                 const principal = parseFloat(ui.loanAmountInput.value.replace(/,/g, '')) || 0;
-                 const annualRate = parseFloat(ui.interestRateSlider.value) || 0;
-                 const years = parseInt(ui.loanDurationSlider.value) || 0;
-
-                 ui.interestRateValue.textContent = `${annualRate.toFixed(1)} %`;
-                 ui.loanDurationValue.textContent = `${years} Yrs`;
-
-                 const { emi, totalInterest, totalPayable } = calculateEMI(principal, annualRate, years);
-
-                 // Format results before displaying
-                 ui.emiOutput.textContent = `${formatCurrency(emi)} /month`;
-                 ui.principalOutput.textContent = formatCurrency(principal);
-                 ui.interestOutput.textContent = formatCurrency(totalInterest > 0 ? totalInterest : 0);
-                 ui.totalPayableOutput.textContent = formatCurrency(totalPayable > 0 ? totalPayable : principal);
-
-                 if (emiChart) {
-                     const principalForChart = principal > 0 ? principal : 0;
-                     const interestForChart = totalInterest > 0 ? totalInterest : 0;
-                     emiChart.data.datasets[0].data = (principalForChart === 0 && interestForChart === 0) ? [1, 0] : [principalForChart, interestForChart];
-                     emiChart.update();
-                 }
-             };
-
+            const updateTaxSlabInfo = () => { const el = DOMElements.personal; const regime = el.regime.value; const ageGroup = el.ageGroup.value; let slabs, config; let regimeName = regime === 'new' ? 'New' : 'Old'; let ageName = ''; if (regime === 'new') { config = taxSlabs_AY2025_26.new; slabs = config.slabs; } else { let oldConfig; if (ageGroup === 'general') { oldConfig = taxSlabs_AY2025_26.old.general; ageName = ' (< 60)'; } else if (ageGroup === 'senior') { oldConfig = taxSlabs_AY2025_26.old.senior; ageName = ' (60-79)'; } else { oldConfig = taxSlabs_AY2025_26.old.superSenior; ageName = ' (80+)'; } config = oldConfig; slabs = config.slabs; } let html = `<p style="font-weight: 600; margin-bottom: 8px;">${regimeName} Regime${ageName}</p>`; slabs.forEach(s => { const f = formatCurrency(s.from === 0 ? 0 : s.from + 1); const t = s.to === Infinity ? 'Above' : formatCurrency(s.to); html += `<div class="tax-slab"><span>${f} - ${t}</span><span>${s.rate}%</span></div>`; }); html += `<p style="font-weight: 600; margin-top: 10px; margin-bottom: 5px;">Rebate u/s 87A:</p><div class="tax-slab"><span>Max ${formatCurrency(config.rebateAmount)}</span><span>if income ≤ ${formatCurrency(config.rebateLimit)}</span></div>`; const rates = regime === 'new' ? surchargeRates.new : surchargeRates.old; html += `<p style="font-weight: 600; margin-top: 10px; margin-bottom: 5px;">Surcharge:</p>`; rates.forEach(r => { html += `<div class="tax-slab"><span>Income > ${formatCurrency(r.limit)}</span><span>${r.rate * 100}% on Tax</span></div>`; }); el.taxSlabInfo.innerHTML = html; };
+            const updatePersonalRemainingBalance = () => { const el = DOMElements.personal; const remaining = currentMonthlyNetSalary - totalPersonalMonthlyExpenses; el.remainingBalance.textContent = formatCurrency(remaining); el.remainingBalance.style.color = remaining < 0 ? 'var(--warning-color)' : (remaining > 0 ? 'var(--success-color)' : 'var(--primary-color)'); };
+            const updateEMICalculatorUI = () => { const ui = DOMElements.emi; const principal = parseFloat(ui.loanAmountInput.value.replace(/,/g, '')) || 0; const annualRate = parseFloat(ui.interestRateSlider.value) || 0; const years = parseInt(ui.loanDurationSlider.value) || 0; ui.interestRateValue.textContent = `${annualRate.toFixed(1)} %`; ui.loanDurationValue.textContent = `${years} Yrs`; const { emi, totalInterest, totalPayable } = calculateEMI(principal, annualRate, years); ui.emiOutput.textContent = `${formatCurrency(emi)} /month`; ui.principalOutput.textContent = formatCurrency(principal); ui.interestOutput.textContent = formatCurrency(totalInterest > 0 ? totalInterest : 0); ui.totalPayableOutput.textContent = formatCurrency(totalPayable > 0 ? totalPayable : principal); if (emiChart) { const principalForChart = principal > 0 ? principal : 0; const interestForChart = totalInterest > 0 ? totalInterest : 0; if (principalForChart === 0 && interestForChart === 0) { emiChart.data.datasets[0].data = [1, 0]; } else { emiChart.data.datasets[0].data = [principalForChart, interestForChart]; } emiChart.update(); } };
 
             // --- Event Handlers ---
-            // Personal Salary Calculation
             DOMElements.personal.grossSalary.addEventListener('input', (e) => DOMElements.personal.monthlySalary.value = (parseFloat(e.target.value) / 12 || 0).toFixed(2));
             DOMElements.personal.regime.addEventListener('change', updateTaxSlabInfo);
             DOMElements.personal.ageGroup.addEventListener('change', updateTaxSlabInfo);
-            DOMElements.personal.calculateSalaryBtn.addEventListener('click', () => { /* ... Function is accurate ... */ const el = DOMElements.personal; const grossAnnual = parseFloat(el.grossSalary.value) || 0; if (grossAnnual <= 0) { alert('Please enter valid Annual Gross Salary.'); return; } const regime = el.regime.value; const age = el.ageGroup.value; const monthlyOtherDed = parseFloat(el.otherDeductions.value) || 0; const taxInfo = calculateIncomeTax_AY2025_26(grossAnnual, regime, age); const annualTax = taxInfo.totalTax; const monthlyTax = annualTax / 12; currentMonthlyNetSalary = (grossAnnual / 12) - monthlyTax - monthlyOtherDed; el.monthlyGrossResult.textContent = formatCurrency(grossAnnual / 12); el.taxResult.textContent = formatCurrency(monthlyTax); el.otherDedResult.textContent = formatCurrency(monthlyOtherDed); el.netResult.textContent = formatCurrency(currentMonthlyNetSalary); el.taxSteps.innerHTML = taxInfo.calculationSteps.join(''); el.salaryResults.classList.remove('hidden'); updatePersonalRemainingBalance(); saveCalculationToHistory(grossAnnual, currentMonthlyNetSalary * 12, annualTax, monthlyOtherDed * 12, regime, age); });
-
-            // Generic Expense Handling
-            const addExpense = (isBusiness) => { /* ... Function is accurate ... */ const ui = isBusiness ? DOMElements.business : DOMElements.personal; const expenseArray = isBusiness ? businessExpenses : personalExpenses; const name = ui.expenseName.value.trim(); const amount = parseFloat(ui.expenseAmount.value) || 0; if (!name || amount <= 0) { alert(`Enter valid ${isBusiness ? 'business ' : ''}expense name & amount.`); return; } const category = ui.expenseCategory.value; expenseArray.push({ id: Date.now(), name, amount, category, date: new Date().toLocaleDateString('en-IN') }); if (isBusiness) { totalBusinessMonthlyExpenses += amount; updateBusinessExpenseUI(); updateBusinessSummary(); } else { totalPersonalMonthlyExpenses += amount; updatePersonalExpenseUI(); updatePersonalRemainingBalance(); } ui.expenseName.value = ''; ui.expenseAmount.value = ''; };
-            const updateExpenseListUI = (isBusiness) => { /* ... Function is accurate ... */ const ui = isBusiness ? DOMElements.business : DOMElements.personal; const expenseArray = isBusiness ? businessExpenses : personalExpenses; const type = isBusiness ? 'business' : 'personal'; ui.expensesList.innerHTML = expenseArray.length === 0 ? `<p style="text-align: center; color: #666; padding: 1rem;">No ${type} expenses.</p>` : expenseArray.map(exp => `<div class="expense-item"><span class="expense-name">${exp.name} <small>(${exp.category})${isBusiness ? '' : ' - ' + exp.date}</small></span><div class="expense-details"><span class="expense-amount">${formatCurrency(exp.amount)}</span><button class="delete-btn" data-id="${exp.id}" data-type="${type}" title="Delete"><i class="fas fa-trash"></i></button></div></div>`).join(''); ui.expensesList.removeEventListener('click', handleExpenseDelete); ui.expensesList.addEventListener('click', handleExpenseDelete); };
+            DOMElements.personal.calculateSalaryBtn.addEventListener('click', () => { const el = DOMElements.personal; const grossAnnual = parseFloat(el.grossSalary.value) || 0; if (grossAnnual <= 0) { alert('Please enter valid Annual Gross Salary.'); return; } const regime = el.regime.value; const age = el.ageGroup.value; const monthlyOtherDed = parseFloat(el.otherDeductions.value) || 0; const taxInfo = calculateIncomeTax_AY2025_26(grossAnnual, regime, age); const annualTax = taxInfo.totalTax; const monthlyTax = annualTax / 12; currentMonthlyNetSalary = (grossAnnual / 12) - monthlyTax - monthlyOtherDed; el.monthlyGrossResult.textContent = formatCurrency(grossAnnual / 12); el.taxResult.textContent = formatCurrency(monthlyTax); el.otherDedResult.textContent = formatCurrency(monthlyOtherDed); el.netResult.textContent = formatCurrency(currentMonthlyNetSalary); el.taxSteps.innerHTML = taxInfo.calculationSteps.join(''); el.salaryResults.classList.remove('hidden'); updatePersonalRemainingBalance(); saveCalculationToHistory(grossAnnual, currentMonthlyNetSalary * 12, annualTax, monthlyOtherDed * 12, regime, age); });
+            const addExpense = (isBusiness) => { const ui = isBusiness ? DOMElements.business : DOMElements.personal; const expenseArray = isBusiness ? businessExpenses : personalExpenses; const name = ui.expenseName.value.trim(); const amount = parseFloat(ui.expenseAmount.value) || 0; if (!name || amount <= 0) { alert(`Enter valid ${isBusiness ? 'business ' : ''}expense name & amount.`); return; } const category = ui.expenseCategory.value; expenseArray.push({ id: Date.now(), name, amount, category, date: new Date().toLocaleDateString('en-IN') }); if (isBusiness) { totalBusinessMonthlyExpenses += amount; updateBusinessExpenseUI(); updateBusinessSummary(); } else { totalPersonalMonthlyExpenses += amount; updatePersonalExpenseUI(); updatePersonalRemainingBalance(); } ui.expenseName.value = ''; ui.expenseAmount.value = ''; };
+            const updateExpenseListUI = (isBusiness) => { const ui = isBusiness ? DOMElements.business : DOMElements.personal; const expenseArray = isBusiness ? businessExpenses : personalExpenses; const type = isBusiness ? 'business' : 'personal'; ui.expensesList.innerHTML = expenseArray.length === 0 ? `<p style="text-align: center; color: #666; padding: 1rem;">No ${type} expenses.</p>` : expenseArray.map(exp => `<div class="expense-item"><span class="expense-name">${exp.name} <small>(${exp.category})${isBusiness ? '' : ' - ' + exp.date}</small></span><div class="expense-details"><span class="expense-amount">${formatCurrency(exp.amount)}</span><button class="delete-btn" data-id="${exp.id}" data-type="${type}" title="Delete"><i class="fas fa-trash"></i></button></div></div>`).join(''); ui.expensesList.removeEventListener('click', handleExpenseDelete); ui.expensesList.addEventListener('click', handleExpenseDelete); };
             const handleExpenseDelete = (e) => { if (e.target.closest('.delete-btn')) deleteExpense(e); };
             const updatePersonalExpenseUI = () => { updateExpenseListUI(false); DOMElements.personal.totalExpenses.textContent = formatCurrency(totalPersonalMonthlyExpenses); };
             const updateBusinessExpenseUI = () => { updateExpenseListUI(true); DOMElements.business.totalExpenses.textContent = formatCurrency(totalBusinessMonthlyExpenses); };
-            const deleteExpense = (e) => { /* ... Function is accurate ... */ const btn = e.target.closest('.delete-btn'); const id = parseInt(btn.dataset.id); const type = btn.dataset.type; const isBusiness = type === 'business'; let expenseArray = isBusiness ? businessExpenses : personalExpenses; const index = expenseArray.findIndex(exp => exp.id === id); if (index === -1) return; const amount = expenseArray[index].amount; expenseArray.splice(index, 1); if (isBusiness) { totalBusinessMonthlyExpenses -= amount; updateBusinessExpenseUI(); updateBusinessSummary(); } else { totalPersonalMonthlyExpenses -= amount; updatePersonalExpenseUI(); updatePersonalRemainingBalance(); } updateExpenseListUI(isBusiness); };
+            const deleteExpense = (e) => { const btn = e.target.closest('.delete-btn'); const id = parseInt(btn.dataset.id); const type = btn.dataset.type; const isBusiness = type === 'business'; let expenseArray = isBusiness ? businessExpenses : personalExpenses; const index = expenseArray.findIndex(exp => exp.id === id); if (index === -1) return; const amount = expenseArray[index].amount; expenseArray.splice(index, 1); if (isBusiness) { totalBusinessMonthlyExpenses -= amount; updateBusinessExpenseUI(); updateBusinessSummary(); } else { totalPersonalMonthlyExpenses -= amount; updatePersonalExpenseUI(); updatePersonalRemainingBalance(); } updateExpenseListUI(isBusiness); };
             DOMElements.personal.addExpenseBtn.addEventListener('click', () => addExpense(false));
             DOMElements.business.addExpenseBtn.addEventListener('click', () => addExpense(true));
-
-            // Personal Savings
-            DOMElements.personal.calcSavingsBtn.addEventListener('click', () => { /* ... Function is accurate ... */ const remaining = currentMonthlyNetSalary - totalPersonalMonthlyExpenses; if (remaining <= 0) { alert('Need positive balance to estimate.'); DOMElements.personal.goldSavings.textContent = '₹0.00'; DOMElements.personal.savingsResult.classList.add('hidden'); return; } DOMElements.personal.goldSavings.textContent = formatCurrency(remaining); DOMElements.personal.savingsResult.classList.remove('hidden'); });
-
-            // History
-            const saveCalculationToHistory = (gross, net, tax, otherDed, regime, age) => { /* ... Function is accurate ... */ const item = { id: new Date().toISOString(), gross, net, tax, otherDed, regime, age, expenses: JSON.parse(JSON.stringify(personalExpenses)), totalExpenses: totalPersonalMonthlyExpenses, date: new Date().toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' }) }; calculationHistory.unshift(item); if (calculationHistory.length > 10) calculationHistory.pop(); localStorage.setItem(HISTORY_STORAGE_KEY, JSON.stringify(calculationHistory)); updateHistoryUI(); };
-            const updateHistoryUI = () => { /* ... Function is accurate ... */ const ui = DOMElements.personal; if (calculationHistory.length === 0) { ui.historyList.innerHTML = `<p style="text-align: center; color: #666; padding: 1rem;">No history.</p>`; ui.clearHistoryBtn.style.display = 'none'; return; } ui.clearHistoryBtn.style.display = 'inline-block'; ui.historyList.innerHTML = calculationHistory.map(item => { const mNet = item.net / 12; const mTax = item.tax / 12; const mDed = item.otherDed / 12; const expSum = item.expenses.length > 0 ? `${item.expenses.length} items, Total: ${formatCurrency(item.totalExpenses)}` : 'None'; return `<div class="history-item"><button class="delete-btn history-delete-btn" data-id="${item.id}" title="Delete"><i class="fas fa-trash"></i></button><div class="history-header"><span>${item.date}</span><span>Net (Mo): ${formatCurrency(mNet)}</span></div><div class="history-details"><div><p><strong>Gross (Yr):</strong> ${formatCurrency(item.gross)}</p><p><strong>Tax (Mo):</strong> ${formatCurrency(mTax)}</p><p><strong>Other Ded (Mo):</strong> ${formatCurrency(mDed)}</p></div><div><p><strong>Regime:</strong> ${item.regime}/${item.age}</p><p><strong>Expenses:</strong> ${expSum}</p></div></div></div>`; }).join(''); ui.historyList.removeEventListener('click', handleHistoryDelete); ui.historyList.addEventListener('click', handleHistoryDelete); };
+            DOMElements.personal.calcSavingsBtn.addEventListener('click', () => { const remaining = currentMonthlyNetSalary - totalPersonalMonthlyExpenses; if (remaining <= 0) { alert('Need positive balance to estimate.'); DOMElements.personal.goldSavings.textContent = '₹0.00'; DOMElements.personal.savingsResult.classList.add('hidden'); return; } DOMElements.personal.goldSavings.textContent = formatCurrency(remaining); DOMElements.personal.savingsResult.classList.remove('hidden'); });
+            const saveCalculationToHistory = (gross, net, tax, otherDed, regime, age) => { const item = { id: new Date().toISOString(), gross, net, tax, otherDed, regime, age, expenses: JSON.parse(JSON.stringify(personalExpenses)), totalExpenses: totalPersonalMonthlyExpenses, date: new Date().toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' }) }; calculationHistory.unshift(item); if (calculationHistory.length > 10) calculationHistory.pop(); localStorage.setItem(HISTORY_STORAGE_KEY, JSON.stringify(calculationHistory)); updateHistoryUI(); };
+            const updateHistoryUI = () => { const ui = DOMElements.personal; if (calculationHistory.length === 0) { ui.historyList.innerHTML = `<p style="text-align: center; color: #666; padding: 1rem;">No history.</p>`; ui.clearHistoryBtn.style.display = 'none'; return; } ui.clearHistoryBtn.style.display = 'inline-block'; ui.historyList.innerHTML = calculationHistory.map(item => { const mNet = item.net / 12; const mTax = item.tax / 12; const mDed = item.otherDed / 12; const expSum = item.expenses.length > 0 ? `${item.expenses.length} items, Total: ${formatCurrency(item.totalExpenses)}` : 'None'; return `<div class="history-item"><button class="delete-btn history-delete-btn" data-id="${item.id}" title="Delete"><i class="fas fa-trash"></i></button><div class="history-header"><span>${item.date}</span><span>Net (Mo): ${formatCurrency(mNet)}</span></div><div class="history-details"><div><p><strong>Gross (Yr):</strong> ${formatCurrency(item.gross)}</p><p><strong>Tax (Mo):</strong> ${formatCurrency(mTax)}</p><p><strong>Other Ded (Mo):</strong> ${formatCurrency(mDed)}</p></div><div><p><strong>Regime:</strong> ${item.regime}/${item.age}</p><p><strong>Expenses:</strong> ${expSum}</p></div></div></div>`; }).join(''); ui.historyList.removeEventListener('click', handleHistoryDelete); ui.historyList.addEventListener('click', handleHistoryDelete); };
             const handleHistoryDelete = (e) => { if (e.target.closest('.history-delete-btn')) deleteHistoryItem(e.target.closest('.history-delete-btn').dataset.id); };
-            const deleteHistoryItem = (id) => { /* ... Function is accurate ... */ calculationHistory = calculationHistory.filter(item => item.id !== id); localStorage.setItem(HISTORY_STORAGE_KEY, JSON.stringify(calculationHistory)); updateHistoryUI(); };
-            const loadHistory = () => { /* ... Function is accurate ... */ const saved = localStorage.getItem(HISTORY_STORAGE_KEY); calculationHistory = saved ? JSON.parse(saved) : []; calculationHistory.sort((a, b) => new Date(b.id) - new Date(a.id)); updateHistoryUI(); };
+            const deleteHistoryItem = (id) => { calculationHistory = calculationHistory.filter(item => item.id !== id); localStorage.setItem(HISTORY_STORAGE_KEY, JSON.stringify(calculationHistory)); updateHistoryUI(); };
+            const loadHistory = () => { const saved = localStorage.getItem(HISTORY_STORAGE_KEY); calculationHistory = saved ? JSON.parse(saved) : []; calculationHistory.sort((a, b) => new Date(b.id) - new Date(a.id)); updateHistoryUI(); };
             DOMElements.personal.clearHistoryBtn.addEventListener('click', () => { if (confirm('Clear all history?')) { calculationHistory = []; localStorage.removeItem(HISTORY_STORAGE_KEY); updateHistoryUI(); } });
-
-            // Business Calculations
-            const updateBusinessSummary = () => { /* ... Function is accurate ... */ const ui = DOMElements.business; if (ui.results.classList.contains('hidden')) return; const grossProfit = parseFloat(ui.grossProfit.textContent.replace(/[^0-9.-]+/g,"")) || 0; const totalPayroll = parseFloat(ui.totalPayroll.textContent.replace(/[^0-9.-]+/g,"")) || 0; const estimatedNet = grossProfit - totalPayroll - totalBusinessMonthlyExpenses; ui.estimatedNet.textContent = formatCurrency(estimatedNet); ui.estimatedNet.style.color = estimatedNet < 0 ? 'var(--warning-color)' : (estimatedNet > 0 ? 'var(--success-color)' : 'var(--primary-color)'); };
-            DOMElements.business.calcPayrollBtn.addEventListener('click', () => { /* ... Function is accurate ... */ const ui = DOMElements.business; const count = parseInt(ui.empCount.value) || 0; const avgSal = parseFloat(ui.avgSalary.value) || 0; const profit = parseFloat(ui.income.value) || 0; if (profit <= 0) { alert('Enter Est. Monthly Gross Profit.'); return; } if (count < 0 || avgSal < 0) { alert('Count and Salary cannot be negative.'); return; } const payrollCost = count * avgSal; ui.grossProfit.textContent = formatCurrency(profit); ui.totalPayroll.textContent = formatCurrency(payrollCost); ui.results.classList.remove('hidden'); updateBusinessSummary(); });
-            DOMElements.business.calcSavingsBtn.addEventListener('click', () => { /* ... Function is accurate ... */ const ui = DOMElements.business; const net = parseFloat(ui.estimatedNet.textContent.replace(/[^0-9.-]+/g,"")) || 0; if (net <= 0) { alert('Est. Net Profit must be positive.'); ui.goldSavings.textContent = '₹0.00'; ui.savingsResult.classList.add('hidden'); return; } ui.goldSavings.textContent = formatCurrency(net * 0.10); ui.savingsResult.classList.remove('hidden'); });
-
-             // EMI Calculator Event Listeners
-             const emiUI = DOMElements.emi;
-             // Use 'input' for sliders for real-time updates
-             emiUI.interestRateSlider.addEventListener('input', updateEMICalculatorUI);
-             emiUI.loanDurationSlider.addEventListener('input', updateEMICalculatorUI);
-             // Use 'input' for loan amount, but also 'change' to format after user finishes typing
-             emiUI.loanAmountInput.addEventListener('input', () => {
-                 // Basic immediate calculation
-                 updateEMICalculatorUI();
-             });
-             emiUI.loanAmountInput.addEventListener('change', () => {
-                 // Format with commas and recalculate
-                 formatInputValue(emiUI.loanAmountInput);
-                 updateEMICalculatorUI();
-             });
-
+            const updateBusinessSummary = () => { const ui = DOMElements.business; if (ui.results.classList.contains('hidden')) return; const grossProfit = parseFloat(ui.grossProfit.textContent.replace(/[^0-9.-]+/g,"")) || 0; const totalPayroll = parseFloat(ui.totalPayroll.textContent.replace(/[^0-9.-]+/g,"")) || 0; const estimatedNet = grossProfit - totalPayroll - totalBusinessMonthlyExpenses; ui.estimatedNet.textContent = formatCurrency(estimatedNet); ui.estimatedNet.style.color = estimatedNet < 0 ? 'var(--warning-color)' : (estimatedNet > 0 ? 'var(--success-color)' : 'var(--primary-color)'); };
+            DOMElements.business.calcPayrollBtn.addEventListener('click', () => { const ui = DOMElements.business; const count = parseInt(ui.empCount.value) || 0; const avgSal = parseFloat(ui.avgSalary.value) || 0; const profit = parseFloat(ui.income.value) || 0; if (profit <= 0) { alert('Enter Est. Monthly Gross Profit.'); return; } if (count < 0 || avgSal < 0) { alert('Count and Salary cannot be negative.'); return; } const payrollCost = count * avgSal; ui.grossProfit.textContent = formatCurrency(profit); ui.totalPayroll.textContent = formatCurrency(payrollCost); ui.results.classList.remove('hidden'); updateBusinessSummary(); });
+            DOMElements.business.calcSavingsBtn.addEventListener('click', () => { const ui = DOMElements.business; const net = parseFloat(ui.estimatedNet.textContent.replace(/[^0-9.-]+/g,"")) || 0; if (net <= 0) { alert('Est. Net Profit must be positive.'); ui.goldSavings.textContent = '₹0.00'; ui.savingsResult.classList.add('hidden'); return; } ui.goldSavings.textContent = formatCurrency(net * 0.10); ui.savingsResult.classList.remove('hidden'); });
+            const emiUI = DOMElements.emi;
+            emiUI.interestRateSlider.addEventListener('input', updateEMICalculatorUI);
+            emiUI.loanDurationSlider.addEventListener('input', updateEMICalculatorUI);
+            emiUI.loanAmountInput.addEventListener('input', () => { updateEMICalculatorUI(); });
+            emiUI.loanAmountInput.addEventListener('change', () => { formatInputValue(emiUI.loanAmountInput); updateEMICalculatorUI(); });
 
             // --- Chart Initialization ---
-            const initEMIChart = () => {
-                if (!DOMElements.emi.chartCanvas) {
-                    console.error("EMI Chart Canvas element not found!");
-                    return;
-                }
-                const ctx = DOMElements.emi.chartCanvas.getContext('2d');
-                const principalColor = getComputedStyle(document.documentElement).getPropertyValue('--emi-principal-color').trim();
-                const interestColor = getComputedStyle(document.documentElement).getPropertyValue('--emi-interest-color').trim();
-
-                if (emiChart) emiChart.destroy();
-                emiChart = new Chart(ctx, {
-                    type: 'doughnut',
-                    data: {
-                        labels: ['Principal', 'Interest'],
-                        datasets: [{
-                            label: 'Loan Breakdown', data: [1, 0], // Initial dummy data
-                            backgroundColor: [ principalColor, interestColor ],
-                            borderColor: ['#ffffff', '#ffffff'], borderWidth: 2, hoverOffset: 4
-                        }]
-                    },
-                    options: {
-                        responsive: true, maintainAspectRatio: false, cutout: '75%', // Make donut thinner like reference
-                        plugins: {
-                            legend: { display: false },
-                            tooltip: {
-                                callbacks: { label: (c) => c.label ? `${c.label}: ${formatCurrency(c.parsed)}` : formatCurrency(c.parsed) }
-                            }
-                        },
-                         animation: {
-                             animateScale: true,
-                             animateRotate: true
-                         }
-                    }
-                });
-            };
-
+            const initEMIChart = () => { if (!DOMElements.emi.chartCanvas) { console.error("EMI Chart Canvas element not found!"); return; } const ctx = DOMElements.emi.chartCanvas.getContext('2d'); const principalColor = getComputedStyle(document.documentElement).getPropertyValue('--emi-principal-color').trim(); const interestColor = getComputedStyle(document.documentElement).getPropertyValue('--emi-interest-color').trim(); if (emiChart) emiChart.destroy(); emiChart = new Chart(ctx, { type: 'doughnut', data: { labels: ['Principal', 'Interest'], datasets: [{ label: 'Loan Breakdown', data: [1, 0], backgroundColor: [ principalColor, interestColor ], borderColor: ['#ffffff', '#ffffff'], borderWidth: 2, hoverOffset: 4 }] }, options: { responsive: true, maintainAspectRatio: false, cutout: '75%', plugins: { legend: { display: false }, tooltip: { callbacks: { label: (c) => c.label ? `${c.label}: ${formatCurrency(c.parsed)}` : formatCurrency(c.parsed) } } }, animation: { animateScale: true, animateRotate: true } } }); };
 
             // Tab Switching
-            DOMElements.shared.tabs.forEach(tab => {
-                tab.addEventListener('click', () => {
-                    if (tab.classList.contains('active')) return;
-                    DOMElements.shared.tabs.forEach(t => t.classList.remove('active'));
-                    DOMElements.shared.tabContents.forEach(c => c.classList.remove('active'));
-                    tab.classList.add('active');
-                    document.getElementById(tab.dataset.tab + '-tab').classList.add('active');
-                    if (window.scrollY > 100) { DOMElements.shared.container.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
-                });
-            });
+            DOMElements.shared.tabs.forEach(tab => { tab.addEventListener('click', () => { if (tab.classList.contains('active')) return; DOMElements.shared.tabs.forEach(t => t.classList.remove('active')); DOMElements.shared.tabContents.forEach(c => c.classList.remove('active')); tab.classList.add('active'); const activeTabContent = document.getElementById(tab.dataset.tab + '-tab'); activeTabContent.classList.add('active'); if (window.scrollY > 100) { DOMElements.shared.container.scrollIntoView({ behavior: 'smooth', block: 'start' }); } }); });
 
             // External Links Setup
-            const setupExternalLinks = () => { /* ... Function is accurate ... */
-                 const links = [ { id: 'jar-logo', url: JAR_APP_LINK }, { id: 'business-jar-logo', url: JAR_APP_LINK }, { id: 'coindcx-logo', url: COINDCX_REFERRAL_LINK }, { id: 'business-coindcx-logo', url: COINDCX_REFERRAL_LINK }, { id: 'explore-crypto', url: COINDCX_REFERRAL_LINK }, { id: 'business-explore-crypto', url: COINDCX_REFERRAL_LINK }, { id: 'cibil-logo', url: CIBIL_UMANG_LINK }, { id: 'business-cibil-logo', url: CIBIL_UMANG_LINK }, { id: 'check-credit', url: CIBIL_UMANG_LINK }, { id: 'check-business-credit', url: CIBIL_UMANG_LINK }, { id: 'tata-neu-logo-personal', url: TATA_NEU_REFERRAL_LINK }, { id: 'tata-neu-button-personal', url: TATA_NEU_REFERRAL_LINK }, { id: 'tata-neu-logo-business', url: TATA_NEU_REFERRAL_LINK }, { id: 'tata-neu-button-business', url: TATA_NEU_REFERRAL_LINK }, { id: 'tata-neu-logo-advisers', url: TATA_NEU_REFERRAL_LINK }, { id: 'tata-neu-button-advisers', url: TATA_NEU_REFERRAL_LINK }, ];
-                 links.forEach(link => { const element = document.getElementById(link.id); if (element) { element.addEventListener('click', (e) => { e.preventDefault(); openLink(link.url); }); if (element.tagName === 'IMG') element.style.cursor = 'pointer'; } else { console.warn(`Element with ID ${link.id} not found.`); } });
-             };
+            const setupExternalLinks = () => { const links = [ { id: 'jar-logo', url: JAR_APP_LINK }, { id: 'business-jar-logo', url: JAR_APP_LINK }, { id: 'coindcx-logo', url: COINDCX_REFERRAL_LINK }, { id: 'business-coindcx-logo', url: COINDCX_REFERRAL_LINK }, { id: 'explore-crypto', url: COINDCX_REFERRAL_LINK }, { id: 'business-explore-crypto', url: COINDCX_REFERRAL_LINK }, { id: 'cibil-logo', url: CIBIL_UMANG_LINK }, { id: 'business-cibil-logo', url: CIBIL_UMANG_LINK }, { id: 'check-credit', url: CIBIL_UMANG_LINK }, { id: 'check-business-credit', url: CIBIL_UMANG_LINK }, { id: 'tata-neu-logo-personal', url: TATA_NEU_REFERRAL_LINK }, { id: 'tata-neu-button-personal', url: TATA_NEU_REFERRAL_LINK }, { id: 'tata-neu-logo-business', url: TATA_NEU_REFERRAL_LINK }, { id: 'tata-neu-button-business', url: TATA_NEU_REFERRAL_LINK }, { id: 'tata-neu-logo-advisers', url: TATA_NEU_REFERRAL_LINK }, { id: 'tata-neu-button-advisers', url: TATA_NEU_REFERRAL_LINK }, ]; links.forEach(link => { const element = document.getElementById(link.id); if (element) { element.addEventListener('click', (e) => { e.preventDefault(); openLink(link.url); }); if (element.tagName === 'IMG') element.style.cursor = 'pointer'; } else { console.warn(`Element with ID ${link.id} not found.`); } }); };
 
             // --- Initial Setup ---
             const initializeApp = () => {
@@ -672,13 +612,19 @@
                 updateBusinessExpenseUI();
                 setupExternalLinks();
                 initEMIChart();
-                updateEMICalculatorUI(); // Initial EMI calculation
-                 formatInputValue(DOMElements.emi.loanAmountInput); // Format initial loan amount
+                updateEMICalculatorUI();
+                formatInputValue(DOMElements.emi.loanAmountInput);
+                // Chatbot initialization removed
             };
 
-            initializeApp();
+            initializeApp(); // Initialize the app
 
-        });
+            // --- Chatbot Logic Removed ---
+
+        }); // End DOMContentLoaded Listener
     </script>
+
+    <!-- Chatbot Elements Removed -->
+
 </body>
 </html>
